@@ -1,0 +1,65 @@
+Description
+In this assignment you will implement methods for an up-down doubly-linked list (UDL). Each node Node in the UDL contains an element, a reference next to the next node in the list, and a reference prev to the previous node in the list, just like a doubly-linked list. An up-down doubly-linked list is created from two lists: a strictly increasing list (up list) and a strictly decreasing list (down list), concatenated together. Both the up list and the down list may be empty (resulting in a strictly increasing, strictly decreasing, or an empty UDL).
+
+For example, consider an UDL based on the up list [0, 1, 4, 9] and the down list [9, 7, 5, 3, 1]. The resulting up-down list is [0, 1, 4, 9, 9, 7, 5, 3, 1].
+
+The UDL contains nodes of class Node. You can find an implementation of Node in the Library tab, along with a brief overview of its methods all the way at the bottom of this text.
+
+The skeleton code of the UDL class UpDownList is provided in the Solution tab. You are expected to implement the following methods:
+
+public Integer removeAt(int i)
+
+Removes the node at index i and returns the element at that node.
+Returns null if there is no node at index i.
+This method must run in (𝑛)
+ time, where 𝑛
+ is the number of nodes in the list.
+You should traverse the list at most once. This means that the getNext and getPrev method can be called at most once each for each node.
+Example: calling removeAt(1) on list [1, 2, 3, 2, 1] returns element 2, and results in the list [1, 3, 2, 1].
+public Integer nonUnique()
+
+Returns an element which appears twice in the list.
+Returns null if all elements are unique.
+This method must run in (𝑛)
+ time, where 𝑛
+ is the number of nodes in the list.
+You should traverse the list at most once. This means that the getNext and getPrev method can be called at most once each for each node.
+Hint: We recommend that you traverse the list from both sides, comparing the elements of the nodes to determine which pointer you should move next,
+Example: calling nonUnique() on list [1, 3, 6, 5, 4, 3, 2, 0] returns element 3.
+public void reverse()
+
+Reverses the list.
+This method must run in (𝑛)
+ time, where 𝑛
+ is the number of nodes in the list.
+Example: calling reverse() on list [1, 3, 5, 7, 6, 4, 2, 0] results in list [0, 2, 4, 6, 7, 5, 3, 1].
+IMPORTANT:
+
+UpDownList already has fields head and tail, inherited from AbstractUpDownList class in the library, which you should use.
+Methods removeAt and nonUnique should traverse the list at most once from each side. This means that for each Node, getNext can be called at most once for that node, and getPrev can be called at most once for that node.
+You are not allowed to make use of the Java library. You should implement all methods yourself.
+You are not allowed to add fields for the class. Adding extra methods is allowed (note: these should not be static).
+You are not allowed to use other data structures other than the linked list and nodes.
+If your implementation does not adhere to the requirements, or if you have cheated the spec test system in any way, points may be deducted.
+Overview of the library code:
+
+class Node {
+  Node(int element);
+  int getElement();
+
+  Node getNext();
+  void setNext(Node node);
+
+  Node getPrev();
+  void setPrev(Node node);
+
+  boolean equals(Object o);
+  String toString();
+}
+
+abstract class AbstractUpDownList {
+  protected Node head;
+  protected Node tail;
+
+  boolean equals(Object o);
+}

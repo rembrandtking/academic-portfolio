@@ -1,0 +1,56 @@
+Description
+In this assignment you need to implement the method shortestPath(Graph g, Vertex a, Vertex b), which calculates the duration of the shortest path between two train stations a and b in a (directed) train network g. For this you need to implement Dijkstra’s algorithm using an adaptable priority queue.
+
+Each connection from station a to station b has a duration, corresponding to the travel time, and a departureTime, corresponding to when the train leaves from a to b. In other words, arriving at a later than departureTime means that you cannot take the train to go to b. Additionally, you’ll have to wait at the station until the train actually leaves.
+
+The method shortestPath(Graph g, Vertex a, Vertex b) should return the earliest time you could be at vertex b, given that you start at vertex a at time 0. If it isn’t possible to get to vertex b at all, the method should return -1.
+
+In the library code you can find implementations for the following classes:
+
+AdaptablePQ is an implementation of an adaptable priority queue.
+PQEntry is used internally to store entries in the priority queue. You cannot use this class.
+Vertex represents a vertex of a graph. Each vertex u stores a set of VertexDurationDepartureTime objects, each of which represents an outgoing edge from vertex u.
+VertexDurationDepartureTime represents an edge. It stores the Vertex where this edge ends, the int duration of this edge and the int departure time from station u.
+Graph is an implementation of a graph, using the Vertex class.
+Note: the weights of all edges in the graph are guaranteed to be positive. Furthermore, the id of a vertex is always between 0 and N-1, where N is the number of vertices in graph g.
+
+IMPORTANT:
+
+Your solution will be manually checked to see if you actually implemented Dijkstra’s algorithm.
+Your solution needs to make use of the adaptable priority queue that is provided in the library.
+For this assignment, your solution will be manually graded. Your spec tests are meant to help you briefly check your implementation, but they will not reflect your final grade.
+Below you can find an overview of several public methods you may find useful. You can see the complete implementations in the library code, along with javadoc comments explaining their functionality. In some classes you will also find private methods. You cannot and do not need to interact with these.
+
+class AdaptablePQ {
+  public AdaptablePQ();
+
+  // Adds the given Vertex to the queue with the given key (priority).
+  // If the Vertex is already in the queue, it replaces its current key (or priority).
+  public void insertOrReplace(Vertex vertex, int key) throws IllegalArgumentException;
+
+  // Returns a vertex with a minimal key (priority).
+  public Vertex removeMin();
+
+  public boolean isEmpty();
+}
+
+class Vertex {
+  public int getId();
+
+  // Returns a triple (Vertex, duration, departureTime) for each neighbouring vertex.
+  public Collection<VertexDurationDepartureTime> getNeighbours();
+}
+
+class Graph {
+  public Collection<Vertex> getAllVertices();
+
+  // Returns a list of triples (Vertex, duration, departureTime) for each neighbouring vertex of v.
+  // The vertices are sorted ascendingly by id.
+  public List<VertexDurationDepartureTime> getNeighbours(Vertex v);
+}
+
+class VertexDurationDepartureTime {
+  public Vertex getVertex();
+  public int getDuration();
+  public int getDepartureTime();
+}

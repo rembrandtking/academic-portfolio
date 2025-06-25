@@ -1,0 +1,47 @@
+package weblab;
+
+import java.util.*;
+
+class Trains {
+
+    public static int shortestPath(Graph g, Vertex a, Vertex b) {
+        int size = g.getAllVertices().size();
+        boolean[] visited = new boolean[size];
+        int[] distances = new int[size];
+
+        for(int x = 0; x < size; x++) {
+            visited[x] = false;
+            distances[x] = Integer.MAX_VALUE;
+        }
+        AdaptablePQ pq = new AdaptablePQ();
+        
+        distances[a.getId()] = 0;
+        pq.insertOrReplace(a, 0);
+
+        while(!pq.isEmpty()) {
+            Vertex currentPQE = pq.removeMin();
+            if(!visited[currentPQE.getId()]) {
+                visited[currentPQE.getId()] = true;
+
+                for (VertexDurationDepartureTime neighbour : currentPQE.getNeighbours()) {
+                    int oldTime = distances[neighbour.getVertex().getId()];
+                    int newTime = distances[currentPQE.getId()] + neighbour.getDuration();
+                    if(distances[currentPQE.getId()] < neighbour.getDepartureTime()) {
+                        newTime = neighbour.getDepartureTime() + neighbour.getDuration(); 
+                    }
+                    if(distances[currentPQE.getId()] <= neighbour.getDepartureTime()) {
+                        if(newTime < oldTime) {
+                            distances[neighbour.getVertex().getId()] = newTime;
+                            pq.insertOrReplace(neighbour.getVertex(), newTime);
+                        }
+                    }
+                }
+            }
+        }
+
+        if(distances[b.getId()] == Integer.MAX_VALUE) {
+            return -1;
+        }
+        return distances[b.getId()];
+    }
+}

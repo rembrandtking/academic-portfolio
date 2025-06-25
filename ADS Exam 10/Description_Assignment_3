@@ -1,0 +1,24 @@
+Description
+In this assignment you will implement a hash set that uses separate chaining. You are expected to implement the following methods:
+
+void add(String key)
+
+The method add takes as input a string key and adds this key to the set. If key is null, nothing should happen.
+This method must run in (1)
+ time.
+void remove(String key)
+
+The method remove takes as input one string key and removes it from the set.
+This method must run in (1)
+ time.
+boolean contains(String key)
+
+The method contains takes as input one string key and returns true if it is in the set, and false otherwise.
+This method must run in (1)
+ time.
+IMPORTANT:
+
+Your implementation of these methods should not allow null to be used as a key.
+You are not allowed to add or modify fields for the class. Adding extra methods is allowed (note: these should not be static).
+You are not allowed to use other data structures other than the given ones.
+If your implementation does not adhere to the requirements, or if you have cheated the spec test system in any way, points may be deducted.

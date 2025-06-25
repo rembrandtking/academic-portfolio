@@ -1,0 +1,80 @@
+package weblab;
+
+import java.util.*;
+
+class RadixMergeSort {
+
+    /**
+     * Sorts the list of arrays based on the elements on position i of the array.
+     * The implemented algorithm must be a recursive merge sort.
+     * @param list
+     * @param i
+     */
+    public static List<int[]> sortWith(List<int[]> list, int i) {
+        if(list.size() < 2) {
+            return list;
+        }
+        
+        List<int[]> list1 = new ArrayList<int[]>();
+        List<int[]> list2 = new ArrayList<int[]>();
+
+        int counter = 0;
+        int firstHalf = list.size() / 2;
+        while(counter < list.size()) {
+            if(counter < firstHalf && counter < list.size()) {
+                list1.add(list.get(counter));
+                counter++;
+            }
+            if(counter >= firstHalf && counter < list.size()) {
+                list2.add(list.get(counter));
+                counter++;
+            }
+        }
+
+        List<int[]> sorted1 = sortWith(list1, i);
+        List<int[]> sorted2 = sortWith(list2, i);
+
+        int counter1 = 0;
+        int counter2 = 0;
+
+        List<int[]> result = new ArrayList<int[]>();
+
+        while(counter1 < sorted1.size() && counter2 < sorted2.size()) {
+            if(sorted1.get(counter1)[i] <= sorted2.get(counter2)[i]) {
+                result.add(sorted1.get(counter1));
+                counter1++;
+            } else {
+                result.add(sorted2.get(counter2));
+                counter2++;
+            }
+        }
+
+        while(counter1 < sorted1.size()) {
+            result.add(sorted1.get(counter1));
+            counter1++;
+        }
+
+        while(counter2 < sorted2.size()) {
+            result.add(sorted2.get(counter2));
+            counter2++;
+        }
+
+        return result;
+    }
+
+    public static
+    /**
+     * Sort the array using LSD Radix Sort, using indices from array 0 to array length-1 as tiebreakers.
+     * @param list - the list to sort.
+     */
+    List<int[]> sort(List<int[]> list) {
+        if(list.isEmpty()) {
+            return list;
+        }
+        List<int[]> current = list;
+        for(int x = list.get(0).length - 1; x >= 0; x--) {
+            current = sortWith(current, x);
+        }
+        return current;
+    }
+}

@@ -1,0 +1,79 @@
+package weblab;
+
+import java.util.Objects;
+
+class Node {
+
+    private int element;
+
+    private Node next;
+
+    private Node prev;
+
+    public Node(int element) {
+        this.element = element;
+    }
+
+    public int getElement() {
+        return this.element;
+    }
+
+    public Node getNext() {
+        return this.next;
+    }
+
+    public Node getPrev() {
+        return this.prev;
+    }
+
+    public void setNext(Node next) {
+        this.next = next;
+    }
+
+    public void setPrev(Node prev) {
+        this.prev = prev;
+    }
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Node)) return false;
+        Node node = (Node) o;
+        if (this.element != node.element) return false;
+        return Objects.equals(this.next, node.next);
+    }
+
+    public String toString() {
+        return "Node{element="
+                + this.element
+                + ", next="
+                + valueOf(this.next)
+                + ", prev="
+                + valueOf(this.prev)
+                + "}";
+    }
+
+    protected static String valueOf(Node node) {
+        if (node == null) return "null";
+        else return Integer.toString(node.element);
+    }
+}
+
+abstract class AbstractUpDownList {
+
+    protected Node head;
+
+    protected Node tail;
+
+    public abstract Integer removeAt(int i);
+
+    public abstract Integer nonUnique();
+
+    public abstract void reverse();
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AbstractUpDownList)) return false;
+        AbstractUpDownList udl = (AbstractUpDownList) o;
+        return Objects.equals(this.head, udl.head);
+    }
+}

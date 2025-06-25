@@ -1,0 +1,74 @@
+package weblab;
+
+class UpDownList extends AbstractUpDownList {
+
+    public Integer removeAt(int i) {
+        if(i < 0 || head == null) {
+            return null;
+        }
+        int counter = 0;
+        Node current = head;
+        while(counter != i) {
+            if(current == null) {
+                return null;
+            }
+            current = current.getNext();
+            if(current == null) {
+                return null;
+            }
+            counter++;
+        }
+        Node previous = current.getPrev();
+        Node nextNode = current.getNext();
+        if(current.equals(head)) {
+            head = nextNode;
+        }
+        if(current.equals(tail)) {
+            tail = previous;
+        }
+        if(previous != null) {
+            previous.setNext(nextNode);
+        }
+        if(nextNode != null) {
+            nextNode.setPrev(previous);
+        }
+        current.setNext(null);
+        current.setPrev(null);
+        return current.getElement();
+    }
+
+    public Integer nonUnique() {
+        if(head == null) {
+            return null;
+        }
+        Node currentHead = head;
+        Node currentTail = tail;
+        while(!currentHead.equals(currentTail)) {
+            if(currentHead.getElement() == currentTail.getElement()) {
+                return currentHead.getElement();
+            }
+            if(currentHead.getElement() < currentTail.getElement()) {
+                currentHead = currentHead.getNext();
+            } else {
+                currentTail = currentTail.getPrev();
+            }
+        }
+        return null;
+    }
+
+    public void reverse() {
+        if(head == null) {
+            return;
+        }
+        Node current = head;
+        while(current != null) {
+            Node nextNode = current.getNext();
+            current.setNext(current.getPrev());
+            current.setPrev(nextNode);
+            current = nextNode;
+        }
+        Node prevTail = tail;
+        tail = head;
+        head = prevTail;
+    }
+}
